@@ -1,4 +1,5 @@
-package com.williamfiset.algorithms.dp.examples;
+
+package com.williamfiset.algorithms.dp.examples.narrowartgallery;
 
 import java.util.Scanner;
 

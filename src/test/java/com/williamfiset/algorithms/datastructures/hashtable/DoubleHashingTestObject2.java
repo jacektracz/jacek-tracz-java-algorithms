@@ -8,7 +8,7 @@ package com.williamfiset.algorithms.datastructures.hashtable;
 
 import java.util.Random;
 
-public class DoubleHashingTestObject implements SecondaryHash {
+public class DoubleHashingTestObject2 implements SecondaryHash {
 
   private int hash, hash2;
   Integer intData = null;
@@ -28,20 +28,20 @@ public class DoubleHashingTestObject implements SecondaryHash {
     }
   }
 
-  public DoubleHashingTestObject(int data) {
+  public DoubleHashingTestObject2(int data) {
     intData = data;
     intHash();
     computeHash();
   }
 
-  public DoubleHashingTestObject(int[] data) {
+  public DoubleHashingTestObject2(int[] data) {
     if (data == null) throw new IllegalArgumentException("Cannot be null");
     vectorData = data;
     vectorHash();
     computeHash();
   }
 
-  public DoubleHashingTestObject(String data) {
+  public DoubleHashingTestObject2(String data) {
     if (data == null) throw new IllegalArgumentException("Cannot be null");
     stringData = data;
     stringHash();

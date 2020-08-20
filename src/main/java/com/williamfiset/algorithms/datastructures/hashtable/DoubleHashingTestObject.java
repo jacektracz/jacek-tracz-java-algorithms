@@ -10,7 +10,8 @@ import java.util.Random;
 
 public class DoubleHashingTestObject implements SecondaryHash {
 
-  private int hash, hash2;
+  int hash;
+private int hash2;
   Integer intData = null;
   int[] vectorData = null;
   String stringData = null;

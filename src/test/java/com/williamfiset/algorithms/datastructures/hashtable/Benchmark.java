@@ -14,7 +14,7 @@ public class Benchmark {
 
   static int[] keys = new int[N];
   static int[] values = new int[N];
-  static DoubleHashingTestObject[] doubleHashKeys = new DoubleHashingTestObject[N];
+  static DoubleHashingTestObject2[] doubleHashKeys = new DoubleHashingTestObject2[N];
 
   static Random RANDOM = new Random();
 
@@ -22,7 +22,7 @@ public class Benchmark {
     for (int i = 0; i < N; i++) {
       keys[i] = RANDOM.nextInt() % MOD;
       values[i] = RANDOM.nextInt() % MOD;
-      doubleHashKeys[i] = new DoubleHashingTestObject(keys[i]);
+      doubleHashKeys[i] = new DoubleHashingTestObject2(keys[i]);
     }
   }
 
@@ -63,7 +63,7 @@ public class Benchmark {
 
   public static void testDoubleHashing() {
 
-    HashTableDoubleHashing<DoubleHashingTestObject, Integer> hashtable =
+    HashTableDoubleHashing<DoubleHashingTestObject2, Integer> hashtable =
         new HashTableDoubleHashing<>();
 
     long start = System.nanoTime();

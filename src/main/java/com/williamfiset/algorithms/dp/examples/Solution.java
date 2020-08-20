@@ -1,3 +1,4 @@
+package com.williamfiset.algorithms.dp.examples;
 class Solution {
   static int n;
   static Long[][] dp;

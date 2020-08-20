@@ -16,7 +16,7 @@ public class HashTableDoubleHashingTest {
     MAX_RAND_NUM = randInt(1, 350);
   }
 
-  HashTableDoubleHashing<DoubleHashingTestObject, Integer> map;
+  HashTableDoubleHashing<DoubleHashingTestObject2, Integer> map;
 
   @Before
   public void setup() {
@@ -52,9 +52,9 @@ public class HashTableDoubleHashingTest {
   @Test
   public void testUpdatingValue() {
     // System.out.println("testUpdatingValue");
-    DoubleHashingTestObject o1 = new DoubleHashingTestObject(1);
-    DoubleHashingTestObject o5 = new DoubleHashingTestObject(5);
-    DoubleHashingTestObject on7 = new DoubleHashingTestObject(-7);
+    DoubleHashingTestObject2 o1 = new DoubleHashingTestObject2(1);
+    DoubleHashingTestObject2 o5 = new DoubleHashingTestObject2(5);
+    DoubleHashingTestObject2 on7 = new DoubleHashingTestObject2(-7);
 
     map.add(o1, 1);
     assertThat(map.get(o1)).isEqualTo(1);
@@ -69,8 +69,8 @@ public class HashTableDoubleHashingTest {
   @Test
   public void testIterator() {
 
-    HashMap<DoubleHashingTestObject, DoubleHashingTestObject> jmap = new HashMap<>();
-    HashTableDoubleHashing<DoubleHashingTestObject, DoubleHashingTestObject> mmap =
+    HashMap<DoubleHashingTestObject2, DoubleHashingTestObject2> jmap = new HashMap<>();
+    HashTableDoubleHashing<DoubleHashingTestObject2, DoubleHashingTestObject2> mmap =
         new HashTableDoubleHashing<>();
     map = null; // Mark null to make sure is not used
 
@@ -80,12 +80,12 @@ public class HashTableDoubleHashingTest {
       jmap.clear();
       assertThat(mmap.isEmpty()).isTrue();
 
-      List<DoubleHashingTestObject> rand_nums = genRandList(MAX_SIZE);
-      for (DoubleHashingTestObject key : rand_nums)
+      List<DoubleHashingTestObject2> rand_nums = genRandList(MAX_SIZE);
+      for (DoubleHashingTestObject2 key : rand_nums)
         assertThat(mmap.add(key, key)).isEqualTo(jmap.put(key, key));
 
       int count = 0;
-      for (DoubleHashingTestObject key : mmap) {
+      for (DoubleHashingTestObject2 key : mmap) {
         assertThat(mmap.get(key)).isEqualTo(key);
         assertThat(mmap.get(key)).isEqualTo(jmap.get(key));
         assertThat(mmap.hasKey(key)).isTrue();
@@ -93,12 +93,12 @@ public class HashTableDoubleHashingTest {
         count++;
       }
 
-      for (DoubleHashingTestObject key : jmap.keySet()) {
+      for (DoubleHashingTestObject2 key : jmap.keySet()) {
         assertThat(mmap.get(key)).isEqualTo(key);
       }
 
-      Set<DoubleHashingTestObject> set = new HashSet<>();
-      for (DoubleHashingTestObject n : rand_nums) set.add(n);
+      Set<DoubleHashingTestObject2> set = new HashSet<>();
+      for (DoubleHashingTestObject2 n : rand_nums) set.add(n);
 
       // System.out.println(set.size() + " " + jmap.size() + " " + count);
 
@@ -110,31 +110,31 @@ public class HashTableDoubleHashingTest {
   @Test(expected = java.util.ConcurrentModificationException.class)
   public void testConcurrentModificationException() {
     // System.out.println("testConcurrentModificationException");
-    DoubleHashingTestObject o1 = new DoubleHashingTestObject(1);
-    DoubleHashingTestObject o2 = new DoubleHashingTestObject(2);
-    DoubleHashingTestObject o3 = new DoubleHashingTestObject(3);
-    DoubleHashingTestObject o4 = new DoubleHashingTestObject(4);
+    DoubleHashingTestObject2 o1 = new DoubleHashingTestObject2(1);
+    DoubleHashingTestObject2 o2 = new DoubleHashingTestObject2(2);
+    DoubleHashingTestObject2 o3 = new DoubleHashingTestObject2(3);
+    DoubleHashingTestObject2 o4 = new DoubleHashingTestObject2(4);
     map.add(o1, 1);
     map.add(o2, 1);
     map.add(o3, 1);
-    for (DoubleHashingTestObject key : map) map.add(o4, 4);
+    for (DoubleHashingTestObject2 key : map) map.add(o4, 4);
   }
 
   @Test(expected = java.util.ConcurrentModificationException.class)
   public void testConcurrentModificationException2() {
-    DoubleHashingTestObject o1 = new DoubleHashingTestObject(1);
-    DoubleHashingTestObject o2 = new DoubleHashingTestObject(2);
-    DoubleHashingTestObject o3 = new DoubleHashingTestObject(3);
+    DoubleHashingTestObject2 o1 = new DoubleHashingTestObject2(1);
+    DoubleHashingTestObject2 o2 = new DoubleHashingTestObject2(2);
+    DoubleHashingTestObject2 o3 = new DoubleHashingTestObject2(3);
     map.add(o1, 1);
     map.add(o2, 1);
     map.add(o3, 1);
-    for (DoubleHashingTestObject key : map) map.remove(o2);
+    for (DoubleHashingTestObject2 key : map) map.remove(o2);
   }
 
   @Test
   public void randomRemove() {
 
-    HashTableDoubleHashing<DoubleHashingTestObject, Integer> map;
+    HashTableDoubleHashing<DoubleHashingTestObject2, Integer> map;
 
     for (int loop = 0; loop < LOOPS; loop++) {
 
@@ -142,18 +142,18 @@ public class HashTableDoubleHashingTest {
       map.clear();
 
       // Add some random values
-      Set<DoubleHashingTestObject> keys_set = new HashSet<>();
+      Set<DoubleHashingTestObject2> keys_set = new HashSet<>();
       for (int i = 0; i < MAX_SIZE; i++) {
         int randomVal = randInt(-MAX_RAND_NUM, MAX_RAND_NUM);
-        DoubleHashingTestObject obj = new DoubleHashingTestObject(randomVal);
+        DoubleHashingTestObject2 obj = new DoubleHashingTestObject2(randomVal);
         keys_set.add(obj);
         map.put(obj, 5);
       }
 
       assertThat(map.size()).isEqualTo(keys_set.size());
 
-      List<DoubleHashingTestObject> keys = map.keys();
-      for (DoubleHashingTestObject key : keys) map.remove(key);
+      List<DoubleHashingTestObject2> keys = map.keys();
+      for (DoubleHashingTestObject2 key : keys) map.remove(key);
 
       assertThat(map.isEmpty()).isTrue();
     }
@@ -162,11 +162,11 @@ public class HashTableDoubleHashingTest {
   @Test
   public void removeTest() {
 
-    HashTableDoubleHashing<DoubleHashingTestObject, Integer> map = new HashTableDoubleHashing<>(7);
+    HashTableDoubleHashing<DoubleHashingTestObject2, Integer> map = new HashTableDoubleHashing<>(7);
 
-    DoubleHashingTestObject o11 = new DoubleHashingTestObject(11);
-    DoubleHashingTestObject o12 = new DoubleHashingTestObject(12);
-    DoubleHashingTestObject o13 = new DoubleHashingTestObject(13);
+    DoubleHashingTestObject2 o11 = new DoubleHashingTestObject2(11);
+    DoubleHashingTestObject2 o12 = new DoubleHashingTestObject2(12);
+    DoubleHashingTestObject2 o13 = new DoubleHashingTestObject2(13);
 
     // Add three elements
     map.put(o11, 0);
@@ -175,11 +175,11 @@ public class HashTableDoubleHashingTest {
     assertThat(map.size()).isEqualTo(3);
 
     // Add ten more
-    for (int i = 1; i <= 10; i++) map.put(new DoubleHashingTestObject(i), 0);
+    for (int i = 1; i <= 10; i++) map.put(new DoubleHashingTestObject2(i), 0);
     assertThat(map.size()).isEqualTo(13);
 
     // Remove ten
-    for (int i = 1; i <= 10; i++) map.remove(new DoubleHashingTestObject(i));
+    for (int i = 1; i <= 10; i++) map.remove(new DoubleHashingTestObject2(i));
     assertThat(map.size()).isEqualTo(3);
 
     // remove three
@@ -192,7 +192,7 @@ public class HashTableDoubleHashingTest {
   @Test
   public void testRandomMapOperations() {
 
-    HashMap<DoubleHashingTestObject, Integer> jmap = new HashMap<>();
+    HashMap<DoubleHashingTestObject2, Integer> jmap = new HashMap<>();
 
     for (int loop = 0; loop < LOOPS; loop++) {
 
@@ -205,12 +205,12 @@ public class HashTableDoubleHashingTest {
       final double probability1 = Math.random();
       final double probability2 = Math.random();
 
-      List<DoubleHashingTestObject> nums = genRandList(MAX_SIZE);
+      List<DoubleHashingTestObject2> nums = genRandList(MAX_SIZE);
       for (int i = 0; i < MAX_SIZE; i++) {
 
         double r = Math.random();
 
-        DoubleHashingTestObject key = nums.get(i);
+        DoubleHashingTestObject2 key = nums.get(i);
         int val = i;
 
         if (r < probability1) assertThat(jmap.put(key, val)).isEqualTo(map.put(key, val));
@@ -231,9 +231,9 @@ public class HashTableDoubleHashingTest {
   @Test
   public void randomIteratorTests() {
 
-    HashTableDoubleHashing<DoubleHashingTestObject, LinkedList<Integer>> m =
+    HashTableDoubleHashing<DoubleHashingTestObject2, LinkedList<Integer>> m =
         new HashTableDoubleHashing<>();
-    HashMap<DoubleHashingTestObject, LinkedList<Integer>> hm = new HashMap<>();
+    HashMap<DoubleHashingTestObject2, LinkedList<Integer>> hm = new HashMap<>();
 
     for (int loop = 0; loop < LOOPS; loop++) {
 
@@ -250,7 +250,7 @@ public class HashTableDoubleHashingTest {
       for (int i = 0; i < MAX_SIZE; i++) {
 
         int keyValue = randInt(0, MAX_SIZE - 1);
-        DoubleHashingTestObject key = new DoubleHashingTestObject(keyValue);
+        DoubleHashingTestObject2 key = new DoubleHashingTestObject2(keyValue);
         LinkedList<Integer> l1 = m.get(key);
         LinkedList<Integer> l2 = hm.get(key);
 
@@ -285,12 +285,12 @@ public class HashTableDoubleHashingTest {
   }
 
   // Generate a list of random numbers
-  static List<DoubleHashingTestObject> genRandList(int sz) {
+  static List<DoubleHashingTestObject2> genRandList(int sz) {
 
-    List<DoubleHashingTestObject> lst = new ArrayList<>(sz);
+    List<DoubleHashingTestObject2> lst = new ArrayList<>(sz);
     for (int i = 0; i < sz; i++) {
       int randNum = randInt(-MAX_RAND_NUM, MAX_RAND_NUM);
-      DoubleHashingTestObject obj = new DoubleHashingTestObject(randNum);
+      DoubleHashingTestObject2 obj = new DoubleHashingTestObject2(randNum);
       lst.add(obj);
     }
     Collections.shuffle(lst);
@@ -298,10 +298,10 @@ public class HashTableDoubleHashingTest {
   }
 
   // Generate a list of unique random numbers
-  static List<DoubleHashingTestObject> genUniqueRandList(int sz) {
-    List<DoubleHashingTestObject> lst = new ArrayList<>(sz);
+  static List<DoubleHashingTestObject2> genUniqueRandList(int sz) {
+    List<DoubleHashingTestObject2> lst = new ArrayList<>(sz);
     for (int i = 0; i < sz; i++) {
-      DoubleHashingTestObject obj = new DoubleHashingTestObject(i);
+      DoubleHashingTestObject2 obj = new DoubleHashingTestObject2(i);
       lst.add(obj);
     }
     Collections.shuffle(lst);
